@@ -1,0 +1,28 @@
+@use '../../abstracts';
+
+.contacts-form {
+  &__note {
+    margin-bottom: 16px;
+  }
+
+  &__fieldset {
+    display: grid;
+    gap: 20px;
+
+    margin-bottom: 30px;
+  }
+
+  .input-field span {
+    display: none;
+  }
+
+  .input-field:nth-child(3), .input-field:nth-child(4) {
+    @include abstracts.cq-from(medium) {
+      grid-column: span 2;
+    }
+  }
+
+  .input-field:nth-child(4) {
+    height: 5em;
+  }
+}

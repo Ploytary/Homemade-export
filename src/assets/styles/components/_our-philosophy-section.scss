@@ -1,0 +1,101 @@
+@use '../abstracts';
+
+$transition-duration: 0.3s;
+
+.our-philosophy-section {
+  text-align: center;
+
+  &__accent-text {
+    margin-bottom: 46px;
+  }
+
+  &__goal-list {
+    display: grid;
+    justify-items: center;
+
+    @include abstracts.cq-from(medium) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abstracts.cq-from(extra-large) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  $offset: 10px;
+
+  &__goal-item {
+    position: relative;
+    border-radius: 50%;
+    outline: 1px solid var(--brand-color-accent);
+    outline-offset: $offset;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1;
+    transition-property: outline;
+    transition-duration: $transition-duration;
+
+    @include abstracts.cq-from(medium) {
+      &:nth-child(3n) {
+        width: 50%;
+        grid-column: -1 / 1;
+        transform: translateY(-9%) translateY(calc(-2 * $offset));
+      }
+    }
+
+    @include abstracts.cq-from(extra-large) {
+      &:nth-child(3n) {
+        width: auto;
+        grid-column: auto;
+        transform: none;
+      }
+    }
+
+    &:hover {
+      outline: 1px solid var(--brand-color-shadow);
+    }
+  }
+
+  &__item-link {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__item-icon {
+    color: var(--brand-color-accent);
+  }
+
+  &__item-title {
+    color: var(--brand-color-shadow);
+    max-width: 70%;
+  }
+
+  &__item-description {
+    max-width: 70%;
+  }
+
+  &__item-decorative-sticker {
+    position: absolute;
+    left: 9%;
+    top: 9%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    aspect-ratio: 1;
+    color: var(--brand-color-primary);
+    background-color: var(--brand-color-shadow);
+    border-radius: 50%;
+    transition-property: background-color;
+    transition-duration: $transition-duration;
+
+    &:hover {
+      background-color: var(--brand-color-accent);
+    }
+  }
+}

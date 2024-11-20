@@ -1,0 +1,127 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:math';
+@use "./variables";
+@use "./functions";
+
+@mixin mq-from($key) {
+  @if map.has-key(variables.$breakpoints, $key) {
+    $size: map.get(variables.$breakpoints, $key);
+
+    @media (width >= $size) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin mq-to($key) {
+  @if map.has-key(variables.$breakpoints, $key) {
+    $size: map.get(variables.$breakpoints, $key);
+
+    @media (width <= $size) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin mq-from-to($from, $to) {
+  @if map.has-key(variables.$breakpoints, $from) and map.has-key(variables.$breakpoints, $to) {
+    $size: map.get(variables.$breakpoints, $from);
+
+    @media (min-width: $from), (max-width: $to) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin cq-from($key) {
+  @if map.has-key(variables.$breakpoints, $key) {
+    $size: map.get(variables.$breakpoints, $key);
+
+    @container (min-width: #{$size}) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin cq-to($key) {
+  @if map.has-key(variables.$breakpoints, $key) {
+    $size: map.get(variables.$breakpoints, $key);
+
+    @container (max-width: #{$size}) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin cq-from-to($from, $to) {
+  @if map.has-key(variables.$breakpoints, $from) and map.has-key(variables.$breakpoints, $to) {
+    $size: map.get(variables.$breakpoints, $from);
+
+    @container (min-width: #{$from}), (max-width: #{$to}) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};
+
+@mixin layout-tiles($layout-set) {
+  $map-length: list.length(map.keys($layout-set));
+  $index: 1;
+
+  @each $key, $value in $layout-set {
+    &:nth-of-type(#{$map-length}n + #{$index}) {
+      @each $propKey, $propValue in $value {
+        #{$propKey}: $propValue;
+      }
+    }
+
+    $index: $index + 1;
+  }
+
+  $index: 1;
+}
+
+@mixin set-font-properties($size: null, $line-height: null, $weight: null, $style: null, $letter-spacing: null) {
+  $is-size-in-px: type-of($size) == number and math.unit($size) == "px";
+  $is-line-height-in-px: type-of($size) == number and math.unit($line-height) == "px";
+
+  @if $size {
+    @if $is-size-in-px {
+      font-size: functions.to-rem($size);
+    } @else {
+      font-size: $size;
+    }
+  }
+
+  @if $line-height {
+    @if $is-line-height-in-px and $is-size-in-px {
+      line-height: functions.line-height-to-ratio($size, $line-height);
+    } @else {
+      line-height: $line-height;
+    }
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $style {
+    font-style: $style;
+  }
+
+  @if $letter-spacing {
+    letter-spacing: $letter-spacing;
+  }
+}

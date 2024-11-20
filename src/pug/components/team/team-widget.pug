@@ -1,0 +1,18 @@
+include ./team-data.pug
+
+-
+  const ourTeamWidgetContent = {
+    titleMarkup: {
+      en: 'Meet the crew of people <br>who love the delicious <b>aromas</b>',
+      ru: 'Познакомьтесь с командой людей, которые любят вкусные <b>ароматы</b>',
+    },
+    button: {
+      name: {en: 'View more', ru: 'Узнать больше'},
+      href: './our-team.html',
+    },
+  };
+
+section.section.team-widget.full-width
+  h2.section__title.team-widget__title!= ourTeamWidgetContent.titleMarkup[lang]
+  +team-list(teamList.slice(0, 3))(class = 'team-widget__team-list')
+  +main-button-arrow(ourTeamWidgetContent.button.name[lang])(class = 'team-widget__button', href = ourTeamWidgetContent.button.href)

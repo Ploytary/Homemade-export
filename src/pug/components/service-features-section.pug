@@ -1,0 +1,65 @@
+-
+  const serviceFeaturesSectionContent = {
+    allyTitle: {en: 'Service features', ru: 'Сервис'},
+    features: [
+      {
+        term: {en: 'Free shipping', ru: 'Бесплатная доставка'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'box',
+      },
+      {
+        term: {en: 'Flexible payment', ru: 'Гибкая оплата'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'card',
+      },
+      {
+        term: {en: 'Buy in online store', ru: 'Купить в интернет-магазине'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'buy',
+      },
+      {
+        term: {en: 'Bonuses & sales', ru: 'Бонусы и продажи'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'bonuses',
+      },
+      {
+        term: {en: 'Free shipping', ru: 'Бесплатная доставка'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'gift-box',
+      },
+      {
+        term: {en: 'Ecology process', ru: 'Экологический процесс'},
+        description: {
+          en: 'Our products are handcrafted and tested with care, then hand mixed and hand.',
+          ru: 'Наши продукты изготавливаются вручную и тщательно тестируются, затем вручную смешиваются и обрабатываются вручную.',
+        },
+        icon: 'ring',
+      },
+    ],
+  };
+
+section.section.service-features-section.full-width
+  h2.section__title.visually-hidden= serviceFeaturesSectionContent.allyTitle
+  ul.service-features-section__list 
+    each feature in serviceFeaturesSectionContent.features
+      li.service-features-section__item
+        .service-features-section__icon.list-item-badge
+          +sprite(feature.icon)(width = 48, height = 48)
+        h3.service-features-section__term= feature.term[lang]
+        p.service-features-section__desc= feature.description[lang]
+

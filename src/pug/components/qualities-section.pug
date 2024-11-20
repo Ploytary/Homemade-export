@@ -1,0 +1,113 @@
+-
+  const qualitiesSectionTextContent = {
+    title: {
+      en: `Let's talk about natural and <b>health</b>`,
+      ru: `Давайте поговорим о природе и <b>здоровье</b>`,
+      },
+    button: {
+      name: {en: 'View more', ru: 'Узнать больше'},
+      href: 'about-us.html',
+    } ,
+    divider: {
+      main: {en: 'natural beauty', ru: 'естественная красота'},
+      gap: {en: '•', ru: '•'},
+    } 
+  };
+  const textParagraphs = [
+    {
+      en: `Cleanse, moisturize and soothe your skin with all natural handmade soap made with organic oils and plant butters, pure essential oils, organic herbs, and spices.`,
+      ru: `Очистите, увлажните и успокойте кожу с помощью натурального мыла ручной работы, изготовленного из органических и растительных масел, чистых эфирных масел, органических трав и специй.`,
+    },
+    {
+      en: `Our moisturizing organic natural soap recipes are meticulously developed to produce a mild, skin-nourishing soap that offers a magnificent long-lasting lather and leaves your skin feeling clean, soft and radiantly healthy.`,
+      ru: `Наши рецепты увлажняющего органического натурального мыла тщательно разработаны для получения мягкого, питательного для кожи мыла, которое обеспечивает великолепную длительную пену и оставляет вашу кожу чистой, мягкой и сияющей здоровьем.`,
+    },
+  ];
+  const qualities = [
+    {
+      title: {en: 'Natural ingredients', ru: 'Натуральные ингридиенты'},
+      description: {
+        en: 'Our products are handcrafted and tested with care, then hand mixed and hand poured, inspired and connected to nature.',
+        ru: 'Наши продукты изготавливаются и тщательно тестируются вручную, затем вручную смешиваются и разливаются, вдохновляясь и соединяясь с природой.',
+      },
+      decorBackgroundSvg: {
+        href: 'background-flower-1',
+        width: 240,
+        height: 200,
+      },
+      button: {
+        name: {en: 'View more', ru: 'Узнать больше'},
+        href: './services.html',
+      },
+    },
+    {
+      title: {en: 'Only handmade', ru: 'Только ручная работа'}, 
+      description: {
+        en: 'Choosing natural isn’t a trend for us, it’s a way of life. Every product we make it toxin-free and 100% natural.',
+        ru: 'Выбор натурального – это для нас не тренд, это образ жизни. Каждый продукт мы делаем без токсинов и на 100% натуральным.',
+      },
+      decorBackgroundSvg: {
+        href: 'background-flower-2',
+        width: 300, 
+        height: 200,
+      },
+      button: {
+        name: {en: 'View more', ru: 'Узнать больше'},
+        href: './services.html',
+      },
+    },
+    {
+      title: {en: 'Unique technology', ru: 'Уникальная технология'},
+      description: {
+        en: 'Instead of focusing on how we want the end product to look, we pick our ingredients based on how we want them to smell.',
+        ru: 'Вместо того, чтобы сосредотачиваться на том, как мы хотим, чтобы конечный продукт выглядел, мы выбираем ингредиенты исходя из того, как мы хотим, чтобы они пахли.',
+      },
+      decorBackgroundSvg: {
+        href: 'background-flower-3',
+        width: 240,
+        height: 200,
+      },
+      button: {
+        name: {en: 'View more', ru: 'Узнать больше'},
+        href: './services.html',
+      },
+    },
+  ];
+  const decorativeImageSetLazysizes = [
+    {
+      srcset: [
+        {path: '@image/common/special-image-4-1-560px.jpg', wDescriptor: 560},
+        {path: '@image/common/special-image-4-1-280px.jpg', wDescriptor: 280},
+
+      ]
+    },
+    {
+      srcset: [
+        {path: '@image/common/special-image-4-2-280px.jpg', wDescriptor: 280},
+        {path: '@image/common/special-image-4-2-140px.jpg', wDescriptor: 140},
+      ]
+    },
+  ];
+
+mixin qualities-list(list)
+  ul.qualities-section__list
+    each item in list 
+      li.qualities-section__list-item()
+        h3.qualities-section__list-item-title= item.title[lang]
+        p.qualities-section__list-item-description= item.description[lang]
+        +slim-button(item.button.name[lang])(class = 'qualities-section__button', icon = 'long-arrow', href = item.button.href)
+        +sprite(item.decorBackgroundSvg.href)(class = 'qualities-section__image', width = item.decorBackgroundSvg.width, height = item.decorBackgroundSvg.height)
+
+section.section.qualities-section.full-width
+  .qualities-section__text 
+    .qualities-section__text-column 
+      h2.section__title.qualities-section__title!= qualitiesSectionTextContent.title[lang]
+      .qualities-section__paragraphs
+        each text in textParagraphs
+          p.qualities-section__paragraph= text[[lang]] 
+      +main-button-arrow(qualitiesSectionTextContent.button.name[lang])(alternate, href = qualitiesSectionTextContent.button.href)
+    .qualities-section__image-column 
+      +image-decorative-special(decorativeImageSetLazysizes)
+  +qualities-list(qualities)
+  +text-divider(qualitiesSectionTextContent.divider.main[lang], qualitiesSectionTextContent.divider.gap[lang])(class = 'text-divider--outlined qualities-section__decorative-text-divider full-width')
+

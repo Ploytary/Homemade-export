@@ -1,0 +1,25 @@
+include ./faq-data.pug
+
+-
+  const faqWidgetSectionContent = {
+    a11yTitle: {en: 'FAQ', ru: 'ЧАВО'},
+    accentTitleMarkup: {
+      en: 'Only quality products should be safe <b>for you</b>',
+      ru: 'Только качественная продукция должна быть безопасной <b>для вас</b>',
+    },
+    list: faqData.slice(0, 3),
+    image: [
+      {path: '@image/common/our-philosophy_2-1-510px.jpg', wDescriptor: 510},
+      {path: '@image/common/our-philosophy_2-1-290px.jpg', wDescriptor: 290},
+    ]
+  };
+
+section.section.faq-widget
+  .faq-widget__columns
+    .faq-widget__text-column
+      h2.section__title.visually-hidden= faqWidgetSectionContent.a11yTitle[lang]
+      p.section__title!= faqWidgetSectionContent.accentTitleMarkup[lang]
+      +accordion(faqWidgetSectionContent.list)(class = 'brand-accordion faq-widget__accordion')
+    .faq-widget__decor-column
+      +image-decorative-w-sticker(faqWidgetSectionContent.image)(class = 'faq-widget__decor-image')
+      

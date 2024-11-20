@@ -1,0 +1,55 @@
+//- const lang = 'ru';
+
+//- const menuHierarchy = {
+//-   'shop': {
+//-     link: 'shop.html',
+//-     lang: { en: 'shop', ru: 'Магазин' },
+//-   },
+//-   'blog': {
+//-     link: 'blog.html',
+//-     lang: { en: 'blog', ru: 'Блог' },
+//-   },
+//-   'Страницы': {
+//-     lang: { en: 'pages', ru: 'Страницы'},
+//-     link: {
+//-       'home': {
+//-         link: 'index.html',
+//-         lang: { en: 'home', ru: 'Главная' },
+//-       },
+//-       'contact-us': {
+//-         link: 'contact-us.html',
+//-         lang: { en: 'contact us', ru: 'Связь с нами' },
+//-       },
+//-       'our-team':  {
+//-         link: 'our-team.html',
+//-         lang: { en: 'our team', ru: 'Наша команда' },
+//-       },
+//-       'faq': {
+//-         link: 'faq.html',
+//-         lang: { en: 'FAQ', ru: 'ЧАВО' },
+//-       },
+//-     },
+//-   },
+//- };
+
+mixin navigation-menu-list(hierarchy)
+  ul.navigation-menu__item-list
+    each item, key in hierarchy
+      - const isString = typeof item.link === 'string';
+      - const sentence = item.lang[lang].slice(0, 1).toUpperCase() + item.lang[lang].split('-').join(' ').slice(1);
+      if isString
+        - const isSame = key.toLowerCase() === pageId.toLowerCase();
+        - const hrefAttr = isSame ? '' : item.link;
+        - const activeClass = isSame ? 'navigation-menu__item--active' : false;
+        - const disabledClass = item.disabled && 'navigation-menu__item--disabled';
+        li.navigation-menu__item(class=[activeClass, disabledClass], tabindex='0') 
+          a(href=hrefAttr)= sentence
+      else
+        li.navigation-menu__item.navigation-menu__submenu(tabindex='0')
+          span.navigation-menu__item-label= sentence
+            +sprite('arrow')
+          +navigation-menu-list(item.link)
+
+mixin navigation-menu(hierarchy)
+  .navigation-menu&attributes(attributes)
+    +navigation-menu-list(hierarchy)

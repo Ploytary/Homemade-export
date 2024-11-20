@@ -1,0 +1,30 @@
+@use '../../abstracts';
+
+.section {
+  padding-block: 70px;
+
+  @include abstracts.cq-from(medium) {
+    padding-block: 100px 70px;
+  }
+  
+  @include abstracts.cq-from(extra-large) {
+    padding-block: 130px 70px;
+  }
+
+  &__title {
+    position: relative;
+    color: var(--text-heading-color);
+
+    &::before {
+      position: absolute;
+      transform: translateY(-115%);
+      line-height: 1;
+      top: 0;
+      content: ".........";
+      color: var(--brand-color-accent);
+      letter-spacing: 0.2em;
+      text-align: inherit;
+    }
+  }
+}
+

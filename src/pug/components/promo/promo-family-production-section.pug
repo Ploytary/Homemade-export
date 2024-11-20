@@ -1,0 +1,44 @@
+-
+  const familyProductionSecton = {
+    title: {en: 'Natural components. Family <b>production</b>', ru: 'Натуральные компоненты. Семейное <b>производство</b>'},
+    description: {
+      en: 'Since 2009, collections of scented candles and sachets from soy wax, a natural oil extracted from soy beans, have been made by hand and with warmth in the soul.',
+      ru: 'С 2009 года коллекции ароматических свечей и саше из соевого воска — натурального масла, добываемого из соевых бобов, изготавливаются вручную и с теплотой в душе.',
+    },
+    list: [
+      {en: 'Our raw materials are guaranteed to be free of oil, wax and phthalates.', ru: 'Наше сырье гарантированно не содержит масла, воска и фталатов.'},
+      {en: 'We offer you stylish and cozy scented candles and sachets that are absolutely safe for you and the environment.', ru: 'Мы предлагаем вам стильные и уютные ароматические свечи и саше, которые абсолютно безопасны для вас и окружающей среды.'},
+      {en: 'The most important thing for us is to make a product with care for the customer, nature and home.', ru: 'Самое главное для нас – сделать продукт с заботой о клиенте, природе и доме.'},
+    ],
+    decorativeTextCircle: {en: 'handmade store', ru: 'ручная работа'},
+    decorativeImageSet: [
+      {
+        srcset: [
+          {path: '@image/common/special-image-2-1-560px.jpg', wDescriptor: 560},
+          {path: '@image/common/special-image-2-1-280px.jpg', wDescriptor: 280},
+        ]
+      },
+      {
+        srcset: [
+          {path: '@image/common/special-image-2-2-280px.jpg', wDescriptor: 280},
+          {path: '@image/common/special-image-2-2-140px.jpg', wDescriptor: 140},
+        ]
+      },
+    ],
+  };
+
+section.section.promo-family-production-section.full-width
+  .promo-family-production-section__columns
+    .promo-family-production-section__column
+      h2.section__title.promo-family-production-section__title!= familyProductionSecton.title[lang]
+      p.promo-family-production-section__description= familyProductionSecton.description[lang]
+      ul.promo-family-production-section__list 
+        each item in familyProductionSecton.list
+          li.promo-family-production-section__item
+            p.promo-family-production-section__item-text
+              +sprite('check')(width = 24, height = 24, class = 'promo-family-production-section__item-check-icon')
+              span= item[lang]
+    .promo-family-production-section__column.promo-family-production-section__decor-column
+      +image-decorative-special(familyProductionSecton.decorativeImageSet)(flipped, class = 'promo-family-production-section__decor-image')
+      .promo-family-production-section__circle-text-wrapper
+        +circleText(125, 35, 'handmade store', {repeat: 2})(class = 'promo-family-production-section__circle-text')

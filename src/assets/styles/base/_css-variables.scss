@@ -1,0 +1,19 @@
+@use '../abstracts';
+
+:root {
+--brand-color-primary: hsl(0deg 0% 100%);
+--brand-color-secondary: hsl(33deg 47% 96%);
+--brand-color-secondary-rich: hsl(33deg 26% 80%);
+--brand-color-secondary-dim: hsl(33deg 7% 70%);
+--brand-color-accent: hsl(21deg 69% 54%);
+--brand-color-shadow: hsl(0deg 0% 15%);
+--neutral-color-light: hsl(0deg 0% 64%);
+--neutral-color-medium: hsl(0deg 0% 53%);
+--neutral-color-dark: hsl(0deg 0% 33%);
+--error-color: hsl(0deg 83% 39%);
+
+// text
+--text-heading-color: var(--brand-color-shadow);
+--text-color: var(--neutral-color-dark);
+--text-accent-color: var(--brand-color-accent);
+}

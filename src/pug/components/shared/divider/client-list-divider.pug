@@ -1,0 +1,57 @@
+-
+  const countMultiplier = 2;
+  const clientListSectionTextCotent = {
+    title: {en: 'Our clients', ru: 'Наши клиенты'},
+  }
+  let clientList = [
+    {
+      name: 'Willi',
+      image: 'client-logo-1-1',
+    },
+    {
+      name: 'Bella Janne',
+      image: 'client-logo-2-1',
+    },
+    {
+      name: 'Yozzi',
+      image: 'client-logo-3-1',
+    },
+    {
+      name: 'Boutique',
+      image: 'client-logo-4-1',
+    },
+    {
+      name: 'Zorro',
+      image: 'client-logo-5-1',
+    },
+    {
+      name: 'Stoni',
+      image: 'client-logo-6-1',
+    },
+  ];
+  clientList = new Array(Math.round(countMultiplier)).fill(null).map(() => clientList).flat();
+
+
+mixin card(slide)
+  li.client-slider__slide(title = slide.name, class = attributes.class)
+    span.client-slider__slide-client-name.visually-hidden= slide.name
+    .client-slider__slide-container 
+      +sprite(slide.image)(class= 'client-slider__slide-hover-image')
+      +sprite(slide.image)(class= 'client-slider__slide-rest-image')
+    +sprite(slide.image)(class= 'client-slider__slide-size-holder')
+
+mixin client-list-divider()
+  -
+    const {airy, ...props} = attributes;
+    const classList = [
+      airy && 'client-list-divider--airy',
+    ];
+
+  section.section.client-list-divider&attributes(props)(class = classList)
+    h2.section__title.visually-hidden= clientListSectionTextCotent.title[lang]
+    .swiper.client-slider
+      ul.swiper-wrapper.client-slider__wrapper
+        each slide in clientList
+         +card(slide)(class='swiper-slide')
+    
+  

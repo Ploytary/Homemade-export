@@ -1,0 +1,55 @@
+@use '../../abstracts';
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 33px 50px;
+  background-color: var(--brand-color-secondary);
+
+  &__title {
+    color: var(--brand-color-shadow);
+  }
+
+  &__rating-label {
+    display: flex;
+    gap: 16px;
+    color: var(--brand-color-shadow);
+    text-transform: uppercase;
+  }
+  
+  &__fieldset {
+    display: grid;
+    padding-top: 12px;
+    padding-bottom: 32px;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .input-field {
+    flex-direction: row;
+  }
+
+  .input-field[data-type="textarea"] {
+    height: 120px;
+    resize: vertical;
+    grid-column: span 2;
+  }
+
+  .input-field[data-type="checkbox"] {
+    grid-column: span 2;
+  }
+
+  .input-field:not([data-type="checkbox"]) .input-field__label {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+}

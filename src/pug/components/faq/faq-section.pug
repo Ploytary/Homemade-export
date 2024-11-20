@@ -1,0 +1,24 @@
+include ./faq-data.pug
+
+-
+  const faqSectionContent = {
+    a11yTitle: {en: 'Frequently asked questions list', ru: 'Список часто задаваемых вопросов'},
+    accentTextMarkup: {
+      en: `We hope you findwhat you are looking for. Explore <b>FAQ's</b>`,
+      ru: 'Мы надеемся, что вы найдете что ищете. Изучите <b>часто задаваемые вопросы</b>'
+    },
+    button: {
+      name: {en: 'View more', ru: 'Увидеть больше'},
+      href: '#',
+    },
+    faqList: faqData,
+  };
+
+section.section.faq-section
+  h2.section__title.visually-hidden= faqSectionContent.a11yTitle[lang]
+  .faq-section__columns 
+    .faq-section__link-column 
+      p.section__title!= faqSectionContent.accentTextMarkup[lang]
+      +main-button-arrow(faqSectionContent.button.name[lang])(alternate, href = faqSectionContent.button.href)
+    .faq-section__list-column 
+      +accordion(faqSectionContent.faqList)(class = 'faq-section__accordion brand-accordion')

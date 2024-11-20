@@ -1,0 +1,128 @@
+@use '../../abstracts';
+
+$transition-duration: 0.3s;
+
+.promo-section-candle-features {
+  &__list {
+    display: grid;
+    justify-items: center;
+    gap: 30px;
+
+    @include abstracts.cq-from(medium) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abstracts.cq-from(extra-large) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 370 / 426;
+    margin-bottom: 60px;
+    background-color: var(--brand-color-secondary-rich);
+  }
+
+  &__image {
+    display: block;
+  }
+
+  &__title {
+    width: 80%;
+    margin-inline: auto;
+    margin-bottom: 56px;
+    text-align: center;
+  }
+
+  &__icon-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+    width: 84px;
+    height: 84px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    color: var(--brand-color-primary);
+    background-color: var(--brand-color-accent);
+    transform: translateY(50%);
+    transition-property: background-color;
+    transition-duration: $transition-duration;
+  }
+
+  &__item {
+    overflow: hidden;
+    max-width: 370px;
+    text-align: center;
+    transition-duration: $transition-duration;
+    transition-property: border-radius;
+
+    &:nth-child(even) {
+      border-top-right-radius: 200px;
+
+      @include abstracts.cq-from(medium) {
+        justify-self: left;
+      }
+
+      @include abstracts.cq-from(extra-large) {
+        margin-top: 40px;
+        justify-self: center;
+      }
+    }
+
+    &:nth-child(odd) {
+      border-top-left-radius: 200px;
+
+      @include abstracts.cq-from(medium) {
+        justify-self: right;
+      }
+
+      @include abstracts.cq-from(extra-large) {
+        justify-self: center;
+      }
+    }
+
+    &:nth-child(3n) {
+      justify-self: center;
+
+      @include abstracts.cq-from(medium) {
+        grid-column: span 2;
+      }
+
+      @include abstracts.cq-from(extra-large) {
+        grid-column: auto;
+      }
+    }
+
+    &:nth-child(even):hover {
+      border-top-right-radius: 0;
+    }
+
+    &:nth-child(odd):hover {
+      border-top-left-radius: 0;
+    }
+  }
+
+  &__item:hover &__icon-container {
+    background-color: var(--brand-color-shadow);
+  }
+
+  &__button {
+    margin-inline: auto;
+    width: fit-content;
+  }
+
+  &__item-title {
+    margin-bottom: 6px;
+  }
+
+  &__item-desc {
+    margin-bottom: 18px;
+  }
+}

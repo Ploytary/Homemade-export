@@ -1,0 +1,35 @@
+.list-item-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  margin-bottom: 15px;
+  width: 60px;
+  height: 60px;
+  color: var(--brand-color-accent);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--brand-color-accent) 8%, transparent) ;
+    transform: translate(-30%, -30%) scale(1);
+    transition-property: transform;
+    transition-duration: 0.3s;
+  }
+
+  &:hover::before {
+    transform: scale(1.8);
+  }
+
+  &--alternate {
+    &::before {
+      transform: translate(30%, -30%) scale(1);
+    }
+  }
+}

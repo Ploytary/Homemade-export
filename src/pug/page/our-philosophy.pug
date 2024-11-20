@@ -1,0 +1,27 @@
+extends ../layout/page-layout
+
+block variables
+  -
+    const pageScripts = ['pages/our-philosophy/index.ts'];
+    const pageTitle = { en: 'Our philosophy', ru: 'Наша философия' };
+    const pageId = 'our-philosophy';
+    const pathSegments = [ {en: 'Home', ru: 'Главная'}, pageTitle ];
+    const titleOptions = {
+      name: pageTitle,
+      pathSegments: pathSegments,
+      lazySizesBackground: [
+        {path: '@image/common/page-header-background-5-2560px.jpg', wDescriptor: 2560},
+        {path: '@image/common/page-header-background-5-1920px.jpg', wDescriptor: 1200},
+        {path: '@image/common/page-header-background-5-1220px.jpg', wDescriptor: 768},
+      ],
+    };
+
+block content
+  main(class= 'page-content content-grid')
+    +page-header(titleOptions)
+    include ../components/our-philosophy-section.pug
+    include ../components/promo/promo-family-production-section.pug 
+    include ../components/shared/divider/achievements-divider-section.pug
+    include ../components/faq/faq-widget.pug
+    +client-list-divider()(airy)
+    

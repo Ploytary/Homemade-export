@@ -1,0 +1,7 @@
+mixin image-decorative-circle(imageSet, text, repeatCount)
+  -
+    const srcsetString = imageSet.map((value) => `${require(value.path)} ${value.wDescriptor}w`).join(', ');
+    const textString = new Array(repeatCount).fill(text).join(' ')
+
+  .image-decorative-circle.lazyload(data-bgset = srcsetString, data-sizes = 'auto')&attributes(attributes)
+    +circleText(250, 70, text, {repeat: repeatCount})(class = 'image-decorative-circle__svg')

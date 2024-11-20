@@ -1,0 +1,44 @@
+include ./shop-product-data.pug
+-
+  const shopItemsWidgetContent = {
+    titleMarkup: {
+      en: `Natural, toxin-free soap that's good for you and <b>the planet</b>`,
+      ru: `Натуральное мыло без токсинов, которое полезно для вас и <b>планеты</b>`,
+    },
+    textDivider: {
+      mainText: {en: `cleaning & care`, ru: `чистка и уход`},
+      gapText: {en: `•`, ru: `•`},
+    },
+    buttonText: {en: `Add to Cart`, ru: `Добавить в корзину`},
+  };
+
+mixin product-card(data)
+  - const priceRate = lang === 'ru' ? USDtoRUBRate : 1;
+  .product-card
+    .product-card__image-wrapper 
+      a.product-card__link.link(href = data.href)
+        +respImage(data.image, alt = data.image.alt)(class = 'product-card__img')
+      .product-card__cart-controls
+        +main-button-cart(shopItemsWidgetContent.buttonText[lang])(class = 'product-card__cart-button')
+    .product-card__description 
+      +ratingOutput(data.rating,'star')
+      h3.product-card__name 
+        a(href = data.href)= data.name[lang]
+      p.product-card__price
+        if data.currentPrice === data.basePrice
+          span.product-card__current-price= (data.currentPrice * priceRate) + currencySymbol[lang]
+        else
+          span.product-card__old-price= (data.basePrice * priceRate) + currencySymbol[lang]
+          span.product-card__current-price= (data.currentPrice * priceRate) + currencySymbol[lang]
+          
+
+section.section.shop-items-widget.full-width
+  +text-divider(shopItemsWidgetContent.textDivider.mainText[lang], shopItemsWidgetContent.textDivider.gapText[lang])(outlined, class = 'shop-items-widget__divider')
+  h2.section__title.shop-items-widget__title!= shopItemsWidgetContent.titleMarkup[lang]
+  .skip-grid-element-behaviour-wrapper.breakout.content-grid-cancel
+    .swiper.shop-items-widget__slider
+      ul.swiper-wrapper
+        each slide in shopProductData
+          li.swiper-slide.shop-items-widget__slide
+            +product-card(slide)
+      .swiper-pagination.shop-items-widget__pagination

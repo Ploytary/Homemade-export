@@ -1,0 +1,258 @@
+@use '../../abstracts';
+
+$transition-duration: 0.3s;
+
+.button {
+  background-color: var(--brand-color-shadow);
+  transition-duration: $transition-duration;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--brand-color-accent);
+  }
+}
+
+.main-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 23px 39px;
+  background-color: var(--brand-color-shadow);
+  color: var(--brand-color-primary);
+  transition-property: background-color, border-color;
+
+  & > * {
+    flex-shrink: 0;
+  }
+
+  &__label {
+    width: fit-content;
+  }
+
+  &:hover {
+    background-color: var(--brand-color-accent);
+  }
+
+  &--bordered {
+    padding: 22px 38px;
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: var(--brand-color-primary);
+    }
+  }
+
+  &--alternate {
+    background-color: var(--brand-color-accent);
+
+    &:hover {
+      background-color: var(--brand-color-shadow);
+      border-color: var(--brand-color-accent);
+    }
+  }
+
+  &--responsive {
+    padding: 14px 18px;
+
+    @include abstracts.cq-from(medium) {
+      padding: 16px 22px;
+    }
+
+    @include abstracts.cq-from(large) {
+      padding: 23px 39px;
+    }
+  }
+
+  &--icon-first &__icon {
+    order: -1; 
+  }
+
+  &--slim {
+    padding: 2px 12px;
+  }
+}
+
+
+.slim-button {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 8px;
+  color: var(--brand-color-accent);
+  background-color: transparent;
+
+  & > * {
+    flex-shrink: 0;
+  }
+
+  &__label {
+    width: fit-content;
+  }
+
+  &__decorative-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--brand-color-accent);
+    opacity: 0.2;
+    transform: scaleX(0.3);
+    transform-origin: left;
+    transition-property: transform;
+    transition-duration: $transition-duration;
+  }
+
+  &__icon {
+    width: 36px;
+    height: 12px;
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:hover &__decorative-background {
+      transform: scaleX(0.85);
+  }
+}
+
+.icon-button {
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  transition-property: color, background-color, border-color;
+
+  &:hover {
+    border-color: var(--brand-color-accent);
+  }
+
+  &--outlined {
+    &:hover {
+      background-color: transparent;
+      color: var(--brand-color-accent);
+    }
+  }
+
+  &--rounded {
+    border-radius: 50%;
+  }
+
+  &--bordered {
+    border: 1px solid var(--neutral-color-dark);
+  }
+
+  &--m-size {
+    width: 42px;
+    aspect-ratio: 1;
+  }
+}
+
+.form-button {
+  padding: 1px 10px;
+  color: var(--brand-color-accent);
+  background-color: color-mix(in srgb, var(--brand-color-accent) 20%, transparent 80%);
+  transition-property: color, background-color, border-color;
+
+  &__label {
+    flex-shrink: 0;
+  }
+
+  &--outlined {
+    padding: 0 9px;
+    background-color: transparent;
+    color: var(--brand-color-shadow);
+    border: 1px solid var(--brand-color-secondary-dim);
+
+    &:hover {
+      background-color: var(--brand-color-accent);
+      border-color: var(--brand-color-accent);
+    }
+  }
+
+  &:hover {
+    color: var(--brand-color-primary);
+    background-color: var(--brand-color-accent);
+  }
+
+  &--filter {
+    background-color: transparent;
+    text-transform: uppercase;
+
+    &:hover {
+      color: var(--brand-color-accent);
+      background-color: color-mix(in srgb, var(--brand-color-accent) 15%, transparent);
+    }
+  }
+}
+
+.pagination-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition-property: border-color, color;
+
+  &__label {
+    flex-shrink: 0;
+  }
+
+  &--bordered {
+    border: 1px solid var(--brand-color-accent);
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--brand-color-accent) 20%, transparent 80%);
+    }
+  }
+
+  &--accent {
+    color: var(--brand-color-accent);
+    
+    &:hover {
+      color: color-mix(in srgb, var(--brand-color-accent) 20%, transparent 80%);
+    }
+  }
+
+  &__icon {
+    width: 36px;
+    height: 12px;
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.socials-button {
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  transition-property: color, background-color, border-color;
+  width: 42px;
+  aspect-ratio: 1;
+  border: 1px solid var(--neutral-color-dark);
+  border-radius: 50%;
+
+  &__label {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    border-color: var(--brand-color-accent);
+  }
+
+  &--alternate {
+    border-color: var(--brand-color-accent);
+
+    &:hover {
+      color: var(--brand-color-primary);
+    }
+  }
+}

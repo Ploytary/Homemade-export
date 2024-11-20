@@ -1,0 +1,56 @@
+@use '../../abstracts';
+
+.contacts-section {
+  &__map {
+    min-height: 350px;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 80px;
+    filter: saturate(0);
+  }
+
+  &__columns {
+    display: grid;
+    gap: 70px;
+
+    @include abstracts.cq-from(medium) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__column-title {
+    margin-bottom: 10px;
+    color: var(--brand-color-shadow);
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      svg {
+        color: var(--brand-color-accent);
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__socials {
+    .socials__list {
+      justify-content: start;
+    }
+  }
+
+  &__text {
+    margin-bottom: 1em;
+  }
+}

@@ -1,0 +1,138 @@
+@use '../../abstracts';
+
+$transition-duration: 0.3s;
+
+.promo-section-product-decor-map {
+  position: relative;
+  padding: 0;
+
+  &__pins {
+    position: relative;
+    aspect-ratio: 165 / 60;
+    inset: 0;
+    background-color: var(--brand-color-secondary-rich);
+  }
+
+  &__pin {
+    position: absolute;
+    width: max-content;
+
+    &:nth-child(1) {
+      left: 12.3%;
+      top: 67.6%;
+    }
+
+    &:nth-child(2) {
+      left: 29.7%;
+      top: 19.2%;
+    }
+
+    &:nth-child(3) {
+      left: 51.5%;
+      top: 42%;
+    }
+
+    &:nth-child(4) {
+      left: 80.9%;
+      top: 51.9%;
+    }
+  }
+
+  $tooltip-color: var(--brand-color-primary);
+
+  &__tooltip {
+    position: absolute;
+    left: 50%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-inline: auto;
+    width: max-content;
+    opacity: 0;
+    background-color: $tooltip-color;
+    transform: translateX(-50%) translateY(-100%) translateY(-30px);
+    transition-duration: $transition-duration;
+    transition-property: opacity;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 15px;
+      aspect-ratio: 1;
+      margin-inline: auto;
+      border: 15px solid transparent;
+      border-top: 15px solid $tooltip-color;
+      transform: translateY(100%);
+    }
+
+    &--alternate {
+      transform: translateX(-50%) translateY(100%) translateY(30px);
+
+      &::after {
+        top: 0;
+        bottom: auto;
+        border: 15px solid transparent;
+        border-bottom: 15px solid $tooltip-color;
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  &__tooltip-icon {
+    color: var(--brand-color-accent);
+  }
+
+  &__point {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    aspect-ratio: 1;
+    border: 1px solid var(--brand-color-primary);
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--brand-color-primary) 50%, transparent);
+
+    @include abstracts.cq-from(extra-large) {
+      width: 48px;
+    }
+  }
+
+  &__point-center {
+    width: 15%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--brand-color-primary);
+    transition-property: transform;
+    transition-duration: $transition-duration;
+  }
+
+  &__hover-area {
+    position: absolute;
+    display: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -100px;
+      z-index: 1;
+    }
+  }
+
+  &__pin:hover &__point-center {
+    transform: scale(1.5);
+  }
+
+  &__pin:hover &__tooltip {
+    opacity: 1;
+  }
+
+  &__pin:hover &__hover-area {
+    display: block;
+  }
+}

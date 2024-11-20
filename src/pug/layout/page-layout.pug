@@ -1,0 +1,38 @@
+include ../components/_mixin-inclusion.pug
+include ../config.pug
+include ../mixins/analytics/_mixin-inclusion.pug
+
+block variables
+
+- const pageTitlePrefix = config.brand.name;
+- const lang = config.localization;
+- const scripts = pageScripts ?? [];
+-
+	const pageDescription = {
+	  en: 'Page for demonstrating writing html code and CSS styles',
+		ru: 'Страница для демонстрации написания html кода и CSS стилей',
+	};
+
+doctype html
+html(lang= lang)
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible", content="ie=edge")
+		meta(name = "description", content = pageDescription[lang])
+		link(href=require('/src/assets/styles/index.scss') rel="stylesheet")
+		link(rel="shortcut icon", href=require('/src/assets/images/favicon.png'), type="image/x-icon")
+		title= `${pageTitlePrefix} — ${pageTitle[lang]}`
+		script(src='@script/helpers/pug-plugin-dev-server.ts')
+		script(src='@script/pages/all/index.ts' defer)
+		each item in scripts
+			script(src=`@script/${item}` defer)
+		+google-tag-manager('GTM-TZCVG6N3')
+	body
+		+google-tag-manager-pixel('GTM-TZCVG6N3')
+		block header
+			include ../components/page-header/page-navigation
+		block content
+		block footer
+			include ../components/page-footer
+		include ../components/page-overlay

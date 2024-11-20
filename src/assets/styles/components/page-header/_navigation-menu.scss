@@ -1,0 +1,141 @@
+/* stylelint-disable no-descending-specificity */
+@use '../../abstracts';
+
+$items-gap: 36px;
+$hover-transition: 0.3s color ease;
+$page-item-hover-text-color: var(--brand-color-accent, red);
+$page-item-hover-background-color: transparent;
+$active-page-text-color: var(--brand-color-accent, green);
+$active-page-background-color: transparent;
+$label-icon-gap: 8px;
+$icon-size: 11px;
+$submenu-gap: 10px;
+$submenu-transition: 0.3s opacity ease;
+$submenu-text-color: var(--brand-color-primary, white);
+$submenu-background-color: var(--brand-color-shadow, lightgray);
+$icon-init-rotate: 90deg;
+
+.navigation-menu {
+  flex-grow: 1;
+  justify-content: center;
+  height: 100%;
+  display: none;
+
+  @include abstracts.mq-from(extra-large) {
+    display: flex;
+  }
+
+  &__item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $items-gap;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 12px;
+
+    transition: $hover-transition;
+
+    a {
+      width: 100%;
+    }
+
+    &:hover:where(:not(.navigation-menu__submenu)), &:hover > span {
+      color: $page-item-hover-text-color;
+      background-color: $page-item-hover-background-color;
+    }
+
+    &--active {
+      color: $active-page-text-color;
+      background-color: $active-page-background-color;
+
+      &:hover {
+        cursor: default;
+        color: $active-page-text-color;
+        background-color: $active-page-background-color;
+      }
+    }
+  
+    &--disabled {
+      pointer-events: none;
+      color: var(--neutral-color-medium);
+    }
+  }
+
+  &__item-label {
+    display: flex;
+    align-items: center;
+    gap: $label-icon-gap;
+    height: 100%;
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+
+    }
+  }
+}
+
+.navigation-menu__submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+
+ .navigation-menu__item-list {
+    position: absolute;
+    bottom: 0;
+    width: max-content;
+    padding: 30px 40px;
+    flex-grow: 1;
+    gap: $submenu-gap;
+    opacity: 0;
+    pointer-events: none;
+    flex-direction: column;
+    color: $submenu-text-color;
+    background-color: $submenu-background-color;
+    transform: translateY(100%);
+    transition: $submenu-transition;
+  
+    .navigation-menu__item {
+      padding-block: 0;
+
+      &:hover {
+        color: $page-item-hover-text-color;
+        background-color: $page-item-hover-background-color;
+      }
+
+      &--active {
+        color: $active-page-text-color;
+        background-color: $active-page-background-color;
+  
+        &:hover {
+          cursor: default;
+          color: $active-page-text-color;
+          background-color: $active-page-background-color;
+        }
+      }
+    }
+
+    .svg-icon {
+      transform: rotate($icon-init-rotate);
+    }
+
+    .navigation-menu__submenu .navigation-menu__item-list {
+      transform: none;
+      inset: auto;
+      position: static;
+    }
+  }
+
+  &:hover {
+    & > .navigation-menu__item-list {
+      pointer-events: auto;
+      display: flex;
+      opacity: 1;
+    }
+  }
+}

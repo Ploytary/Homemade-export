@@ -1,0 +1,111 @@
+@use '../abstracts';
+
+$background-color: var(--brand-color-accent);
+$content-color: var(--brand-color-primary);
+
+.testimonials-section {
+  padding: 0;
+}
+
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+
+  @include abstracts.cq-from(extra-large) {
+    grid-template-columns: repeat(2, 50%);
+    min-height: 700px;
+  }
+
+  &__decorative-image-column {
+    display: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--brand-color-secondary-rich);
+
+    @include abstracts.cq-from(extra-large) {
+      display: block;
+    }
+  }
+
+  &__quotes-column {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    color: $content-color;
+    background-color: $background-color;
+    background-position: right 100px top 50px;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-blend-mode: multiply;
+
+    @include abstracts.cq-from(medium) {
+      padding: 50px;
+    }
+
+    @include abstracts.cq-from(extra-large) {
+      padding: 95px 12%;
+    }
+  }
+
+  &__decor-bg-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    transform: scaleX(-1);
+    mix-blend-mode: overlay;
+  }
+
+  &__slider {
+    background-color: var(--brand-color-accent);
+  }
+
+  &__slider &__slider-pagination {
+    position: static;
+    justify-content: start;
+
+    .swiper-pagination-bullet {
+      background-color: $content-color;
+    }
+  }
+
+  &__list {
+    margin-bottom: 50px;
+  }
+
+  &__testimonial-card {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 26px;
+  }
+
+  &__testimonial-card-author {
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    gap: 11px 24px;
+    grid-row: 2;
+  }
+
+  &__testimonial-card-author-name {
+    align-self: self-end;
+  }
+
+  &__testimonial-card-author-role {
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  &__testimonial-card-author-avatar {
+    grid-row: 1 / 3;
+    aspect-ratio: 1;
+    height: auto;
+    border-radius: 50%;
+    background-color: var(--brand-color-secondary-rich);
+  }
+
+  &__quotes-icon {
+    transform: rotate(180deg);
+  }
+}

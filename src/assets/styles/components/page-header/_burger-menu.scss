@@ -1,0 +1,199 @@
+/* stylelint-disable no-descending-specificity */
+@use '../../abstracts';
+@use 'sass:map';
+
+$icon-size: 14px;
+$text-color: var(--brand-color-primary, inherit);
+$content-background-color: var(--brand-color-shadow, gray);
+$page-item-hover-text-color: var(--brand-color-accent, red);
+$page-item-hover-background-color: transparent;
+$submenu-text-color: var(--brand-color-primary, white);
+$submenu-background-color: var(--brand-color-shadow, lightgray);
+$active-page-text-color: var(--brand-color-accent, green);
+$active-page-background-color: transparent;
+$items-gap: 10px;
+$item-padding: 4px 0;
+$icon-init-rotate: -90deg;
+$label-icon-gap: 8px;
+$submenu-gap: 10px;
+$easing-function: ease;
+$animation-duration: 0.3s;
+$z-index: map.get(abstracts.$z-index-levels, 'menu') + 10;
+
+.burger-menu {
+  display: flex;
+
+  &__content-close-button {
+    background-color: $content-background-color;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &__logo-wrapper {
+    margin-bottom: 30px;
+    width: 113px;
+    height: 71px;
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: $z-index - 1;
+    background-color: var(--brand-color-shadow);
+    opacity: 0.5;
+  }
+
+  &__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: $z-index;
+    padding: 30px;
+    width: 340px;
+    color: $text-color;
+    background-color: $content-background-color;
+
+    visibility: hidden;
+  }
+
+  &__item-list {
+    display: flex;
+    flex-direction: column;
+    gap: $items-gap;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $item-padding;
+    transition: $animation-duration color $easing-function;
+
+    &:hover:where(:not(.burger-menu__submenu)), &:hover > span {
+      color: $page-item-hover-text-color;
+      background-color: $page-item-hover-background-color;
+    }
+
+    &--active {
+      color: $active-page-text-color;
+      background-color: $active-page-background-color;
+
+      &:hover {
+        cursor: default;
+        color: $active-page-text-color;
+        background-color: $active-page-background-color;
+      }
+    }
+
+    &--disabled {
+      pointer-events: none;
+      color: var(--neutral-color-medium);
+    }
+  }
+
+  &__item-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $label-icon-gap;
+    height: 100%;
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+      transform: rotate($icon-init-rotate);
+      transition: transform $animation-duration $easing-function;
+    }
+  }
+
+  &:focus-within &__content  {
+    visibility: visible;
+  }
+
+  @include abstracts.mq-from(extra-large) {
+    display: none;
+  }
+}
+
+.burger-menu__submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+
+ .burger-menu__item-list {
+    width: max-content;
+    padding-top: 14px;
+    flex-grow: 1;
+    gap: $submenu-gap;
+    flex-direction: column;
+    color: $submenu-text-color;
+    background-color: $submenu-background-color;
+    transition: $animation-duration opacity $easing-function;
+  
+    .burger-menu__item {
+      padding-block: 4px;
+      padding-left: 20px;
+
+      &:hover {
+        color: $page-item-hover-text-color;
+        background-color: $page-item-hover-background-color;
+      }
+
+      &--active {
+        color: $active-page-text-color;
+        background-color: $active-page-background-color;
+  
+        &:hover {
+          cursor: default;
+          color: $active-page-text-color;
+          background-color: $active-page-background-color;
+        }
+      }
+    }
+
+    .burger-menu__submenu .burger-menu__item-list {
+      transform: none;
+      inset: auto;
+      position: static;
+    }
+  }
+
+  &:hover {
+    & > .burger-menu__item-list {
+      display: flex;
+      opacity: 1;
+    }
+  }
+}
+
+// accordion style
+.burger-menu__content--accordion {
+  .burger-menu__item-list {
+    width: 100%;
+  }
+
+  .burger-menu__submenu {
+    display: grid;
+    grid-template-rows: min-content 0fr;
+    grid-template-columns: 1fr;
+    transition: grid-template-rows $animation-duration $easing-function;
+    overflow: hidden;
+
+    &:focus, &:focus-within {
+      grid-template-rows: min-content 1fr;
+      color: $page-item-hover-text-color;
+      background-color: $page-item-hover-background-color;
+
+      svg {
+        transform: rotate($icon-init-rotate + 90deg);
+      }
+    }
+  }
+  
+  .burger-menu__submenu-inner {
+    overflow: hidden;
+  } 
+}

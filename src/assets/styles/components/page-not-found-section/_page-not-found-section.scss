@@ -1,0 +1,63 @@
+@use '../../abstracts';
+
+.page-not-found-section {
+  &__column-inner {
+    display: grid;
+    grid-auto-rows: min-content;
+    align-items: center;
+    gap: 100px;
+    text-align: center;
+
+    @include abstracts.cq-from(medium) {
+      grid-template-columns: repeat(2, 1fr);
+      text-align: left;
+    }
+
+    & > * {
+      min-width: 100%;
+    }
+  }
+
+  &__text-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include abstracts.cq-from(medium) {
+      align-items: start;
+    }
+  }
+
+  &__accent-text {
+    color: var(--brand-color-accent);
+    margin-bottom: 0.1em;
+  }
+
+  &__lead-text {
+    color: var(--brand-color-shadow);
+    margin-bottom: 0.1em;
+  }
+
+  &__paragraph-text {
+    margin-bottom: 22px;
+  }
+
+  &__search-form {
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  &__decorative-image {
+    justify-self: end;
+    z-index: -1;
+    height: 100%;
+    aspect-ratio: 1;
+    background-size: 81%;
+    transform: scale(1.1);
+
+    @include abstracts.cq-from(medium) {
+      transform: scale(1.2);
+    }
+  }
+}

@@ -1,0 +1,43 @@
+-
+  const productDecorMap = {
+    a11yTitle: {en: 'Decorative product map', ru: 'Декоративная карта продуктов'},
+    pins: [
+      {
+        name: {en: 'Coconut bar soap', ru: 'Кокосовое мыло'},
+        href: '#',
+      },
+      {
+        name: {en: 'Single wick candle', ru: 'Свеча с одним фитилем'},
+        href: '#',
+      },
+      {
+        name: {en: 'Vanilla soy candle', ru: 'Ванильно-соевая свеча'},
+        href: '#',
+      },
+      {
+        name: {en: 'Ginger soy candle', ru: 'Имбирно-соевая свеча'},
+        href: '#',
+      },
+    ],
+    mapImage: [
+      {path: '@image/common/sevices-map-1920px.jpg', wDescriptor: 1920},
+      {path: '@image/common/sevices-map-1200px.jpg', wDescriptor: 1200},
+      {path: '@image/common/sevices-map-768px.jpg', wDescriptor: 768},
+      {path: '@image/common/sevices-map-380px.jpg', wDescriptor: 380},
+    ]
+  };
+
+  const mapImageSetString = productDecorMap.mapImage.map((value) => `${require(value.path)} ${value.wDescriptor}w`).join(', ');
+
+section.section.promo-section-product-decor-map.full-width
+  h2.section__title.visually-hidden= productDecorMap.a11yTitle[lang]
+  ul.promo-section-product-decor-map__pins.full-width.content-grid-cancel.lazyload(data-bgset = mapImageSetString, data-sizes = 'auto')
+    each pin in productDecorMap.pins
+      li.promo-section-product-decor-map__pin
+        a(href=pin.href) 
+          p.promo-section-product-decor-map__tooltip(class = Math.random() > 0.5 ? 'promo-section-product-decor-map__tooltip--alternate': undefined)
+            span= pin.name[lang]
+            +sprite('long-arrow')(width = 23, height = 18, class = 'promo-section-product-decor-map__tooltip-icon')
+          .promo-section-product-decor-map__point
+            .promo-section-product-decor-map__hover-area
+            .promo-section-product-decor-map__point-center

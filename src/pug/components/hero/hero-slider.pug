@@ -1,0 +1,30 @@
+-
+  const heroSliderTextContent = {
+    button: {en: 'View more', ru: 'Узнать больше'},
+  }
+
+mixin hero-slide(slide, index)
+  - const srcsetString = slide.background.map((value) => `${require(value.path)} ${value.wDescriptor}w`).join(', ');
+  if index
+    article.hero-slider__slide.content-grid(data-bgset = srcsetString, data-sizes = 'auto')&attributes(attributes)
+      .hero-slider__slide-content
+        h3.hero-slider__slide-title!= slide.titleMarkup[lang]
+          +sticker()(class= 'hero-slider__slide-sticker', rotate)
+        p.hero-slider__slide-description= slide.description[lang]
+        +main-button-arrow(heroSliderTextContent.button[lang])(class = 'hero-slider__button', href = 'about-us.html', responsive)
+  else
+    article.hero-slider__slide.content-grid.lazyload(data-bgset = srcsetString, data-sizes = 'auto')&attributes(attributes)
+      .hero-slider__slide-content
+        h3.hero-slider__slide-title!= slide.titleMarkup[lang]
+          +sticker()(class= 'hero-slider__slide-sticker', rotate)
+        p.hero-slider__slide-description= slide.description[lang]
+        +main-button-arrow(heroSliderTextContent.button[lang])(class = 'hero-slider__button', href = 'about-us.html', responsive)
+
+mixin hero-slider(slides)
+  .swiper.hero-slider
+    ul.swiper-wrapper
+      each slide, index in slides
+        li.swiper-slide
+          +hero-slide(slide, index)
+    .hero-slider__pagination-wrapper.content-grid
+      .swiper-pagination.hero-slider__pagination

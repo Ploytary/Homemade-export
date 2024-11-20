@@ -1,0 +1,22 @@
+mixin accordion-element(data)
+  - const details = Array.isArray(data.details) ? data.details : [data.details];
+
+  .accordion__slot
+    dt.accordion__summary
+      button.accordion__trigger(type='button')
+        span.accordion__summary-text= lang ? data.summary[lang] : data.summary
+        span.accordion__icon
+          +sprite('plus')(width = 24, height = 24)
+          +sprite('minus')(width = 18, height = 18)
+    dd.accordion__details
+      .accordion__details-inner
+        each paragraph in details
+          p.accordion__details-text= lang ? paragraph[lang] : paragraph
+
+//- type TextData = Record<lang, string> | string
+//- list: [{summary: TextData; details: TextData | TextData[]}]
+
+mixin accordion(list)
+  dl.accordion&attributes(attributes)
+    each item in list
+      +accordion-element(item)

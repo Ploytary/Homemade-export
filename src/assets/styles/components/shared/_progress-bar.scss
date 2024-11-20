@@ -1,0 +1,24 @@
+.progress-bar {
+  display: grid;
+  gap: 14px;
+  padding-block: 10px;
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+    color: var(--brand-color-shadow);
+    text-transform: uppercase;
+  }
+
+  &__bar {
+    background-color: var(--brand-color-accent);
+    height: 2px;
+
+    &-value {
+      background-color: var(--brand-color-shadow);
+      height: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+  }
+}

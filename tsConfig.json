@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["config/webpack/types/*", "config/gulp/types/*"]
+    },
+    "target": "ES5",
+    "module": "ESNext",
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitAny": true,
+  },
+  "typeRoots": [
+    "./config/types",
+    "./node_modules/@types",
+    "./node_modules/@yandex/ymaps3-types",
+    "./src/assets/js/types"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "include": ["./src/**/*.ts", "./config/**/*.ts"],
+  "exclude": [
+    "node_modules"
+  ]
+}

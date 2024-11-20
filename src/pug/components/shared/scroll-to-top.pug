@@ -1,0 +1,9 @@
+-
+  const scrollToTopContent = {
+    labelText: {en: 'scroll to top', ru: 'Прокрутить наверх'},
+  };
+
+.scroll-to.scroll-to--top
+  button.button.scroll-to__button
+    span.scroll-to__label.visually-hidden= scrollToTopContent.labelText[lang]
+    +sprite('long-arrow')(class = 'scroll-to__svg-icon', width = 38, height = 18)

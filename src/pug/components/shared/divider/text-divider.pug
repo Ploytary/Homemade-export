@@ -1,0 +1,11 @@
+mixin text-divider(text, divider)
+  -
+    const {outlined, compact, ...props} = attributes;
+    const classList = [
+      outlined && 'text-divider--outlined',
+      compact && 'text-divider--compact',
+    ];
+
+  .text-divider&attributes(props)(class = classList)
+    span.text-divider__text= text
+    span.text-divider__gap-text= divider

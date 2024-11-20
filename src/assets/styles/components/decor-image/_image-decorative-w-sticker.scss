@@ -1,0 +1,25 @@
+@use '../../abstracts';
+
+.image-decorative-w-sticker {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+
+  &__image {
+    width: 85%;
+    height: 100%;
+    margin-left: auto;
+    border-top-right-radius: 50%;
+    background-color: var(--brand-color-secondary-rich);
+  }
+
+  &__sticker {
+    position: absolute;
+    left: 0;
+    top: 30%;
+    width: 30%;
+    height: 30%;
+    max-width: 188px;
+    max-height: 188px;
+  }
+}

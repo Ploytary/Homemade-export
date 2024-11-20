@@ -1,0 +1,28 @@
+-
+  const videoPresentationContent = {
+    titleMarkup: {
+      en: `Natural, toxin-free candles & soap are good for you and for <b>the planet</b>`,
+      ru: `Натуральные, не содержащие токсинов свечи и мыло полезны для вас и <b>планеты</b>`,
+    },
+    paragraphs: [
+      {
+        en: `According to the Center, the Balsam Fir is abundant and nowhere near endangered, so we don’t need to worry about running out or damaging the ecosystem anytime soon. More importantly, the essential oil we use to make our products is distilled from the needles.`,
+        ru: `По данным Центра, пихта бальзамическая распространена в изобилии и не находится под угрозой исчезновения, поэтому нам не нужно беспокоиться о том, что она иссякнет или повредит экосистему в ближайшее время. Что еще более важно, эфирное масло, которое мы используем для изготовления нашей продукции, получают из хвои.`,
+      },
+      {
+        en: `That is why our jewelry is so soulful and with its history. In addition, everyone can add their own meaning and make jewelry their personal symbol of good luck. While most people may not find the Fir too appetizing, it’s certainly edible and may help sustain you in an emergency (let’s hope it never comes to that!). The resin has also historically been munched on like a chewing gum.`,
+        ru: `Именно поэтому наши украшения такие душевные и со своей историей. Кроме того, каждый может добавить свой смысл и сделать украшение своим личным символом удачи. Хотя большинству людей ель может не показаться слишком аппетитной, она, безусловно, съедобна и может помочь вам поддержать вас в чрезвычайной ситуации (будем надеяться, что до этого никогда не дойдет!). Смолу исторически жевали, как жевательную резинку.`,
+      },
+    ],
+    videoSrc: '@video/test/test.mp4',
+    poster: '@image/common/about_us-video_box-1.jpg',
+  };
+
+section.section.video-presentation-section.full-width 
+  .video-presentation-section__inner
+    header
+      h2.section__title!= videoPresentationContent.titleMarkup[lang]
+    .video-presentation-section__text-container 
+      each paragraph in videoPresentationContent.paragraphs
+        p= paragraph[lang]
+    +videoplayer(videoPresentationContent.videoSrc, videoPresentationContent.poster)(class = 'video-presentation-section__video')

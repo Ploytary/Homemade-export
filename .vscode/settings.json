@@ -1,0 +1,54 @@
+{
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    // "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+  },
+  "path-intellisense.mappings": {
+    "@sprite": "${workspaceFolder}/src/assets/images/common/svg-sprite/sprite.svg",
+    "@image": "${workspaceFolder}/src/assets/images",
+    "@video": "${workspaceFolder}/src/assets/videos",
+    "@script": "${workspaceFolder}/src/assets/js",
+    "@style": "${workspaceFolder}/src/assets/style",
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "less", "postcss", "scss", "sass"],
+  // "emmet.showExpandedAbbreviation": "never",
+  // "emmet.showSuggestionsAsSnippets": true,
+  "editor.snippetSuggestions": "bottom",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+}

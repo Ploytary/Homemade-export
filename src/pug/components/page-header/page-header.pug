@@ -1,0 +1,10 @@
+mixin page-header(options)
+  - const srcsetString = options.lazySizesBackground.map((value) => `${require(value.path)} ${value.wDescriptor}w`).join(', ');
+  - const segmentCount = options.pathSegments.length;
+  header.page-header.full-width.lazyload(data-bgset = srcsetString, data-sizes = 'auto')&attributes(attributes)
+    h1.page-header__title= options.name[lang]
+    p.page-header__breadcrumbs
+      each segment, index in options.pathSegments
+        span(class = index === (segmentCount - 1) ? 'page-header__breadcrumb-segment--current' : 'page-header__breadcrumb-segment')= segment[lang]
+          if index < (segmentCount - 1)
+            +sprite('arrow')( width = 14, height = 14, class = 'page-header__breadcrumbs-divider')

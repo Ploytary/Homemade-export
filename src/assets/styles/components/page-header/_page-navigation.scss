@@ -1,0 +1,15 @@
+@use '../../abstracts';
+@use 'sass:map';
+
+.page-navigation {
+  z-index: map.get(abstracts.$z-index-levels, menu);
+  align-items: center;
+  min-height: 100px;
+  color: var(--brand-color-primary);
+  background-color: var(--brand-color-shadow);
+
+  @include abstracts.mq-from(extra-large) {
+    color: var(--brand-color-shadow);
+    background-color: var(--brand-color-primary);
+  }
+}

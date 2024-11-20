@@ -1,0 +1,29 @@
+extends ../layout/page-layout
+
+block variables
+  -
+    const pageScripts = [];
+    const pageTitle = { en: 'About Us', ru: 'О нас' };
+    const pageId = 'about-us';
+    const pathSegments = [ {en: 'Home', ru: 'Главная'}, pageTitle ];
+    const titleOptions = {
+      name: pageTitle,
+      pathSegments: pathSegments,
+      lazySizesBackground: [
+        {path: '@image/common/page-header-background-1-2560px.jpg', wDescriptor: 2560},
+        {path: '@image/common/page-header-background-1-1920px.jpg', wDescriptor: 1200},
+        {path: '@image/common/page-header-background-1-1220px.jpg', wDescriptor: 768},
+      ],
+    };
+    const aboutUsPageTestimonialsBackgroundImageSet = [
+      {path: '@image/common/image-column-background-2-960px.jpg', wDescriptor: 960},
+      {path: '@image/common/image-column-background-2-600px.jpg', wDescriptor: 600},
+    ];
+
+block content
+  main(class= 'page-content content-grid')
+    +page-header(titleOptions)
+    include ../components/video-presentation-section.pug
+    +client-list-divider()(airy)
+    include ../components/team/team-widget.pug
+    +testimonials-section(aboutUsPageTestimonialsBackgroundImageSet)

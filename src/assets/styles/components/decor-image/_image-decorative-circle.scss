@@ -1,0 +1,8 @@
+.image-decorative-circle {
+  &__svg {
+    display: block;
+    fill: none;
+    stroke: var(--brand-color-secondary-rich);
+    stroke-width: 1px;
+  }
+}

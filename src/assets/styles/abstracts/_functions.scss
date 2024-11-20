@@ -1,0 +1,143 @@
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use './variables';
+
+@function remove-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+@function to-rem($number) {
+  $default-rem-size: 16; // px
+
+  @if unitless($number) {
+    @error 'unitless parameter';
+  } @else if math.unit($number) == "px" {
+    @return math.div(remove-units($number), $default-rem-size) * 1rem;
+  } @else if math.unit($number) == "rem" {
+    @return $number;
+  } @else {
+    @error 'parameter must be in rem or px unit';
+  }
+};
+
+@function to-px($number) {
+  $default-rem-size: 16; // px
+
+  @if unitless($number) {
+    @error 'unitless parameter';
+  } @else if math.unit($number) == "px" {
+    @return remove-units($number) * 1px;
+  } @else if math.unit($number) == "rem" {
+    @return remove-units($number) * $default-rem-size * 1px;
+  } @else {
+    @error 'parameter must be in rem or px unit';
+  }
+};
+
+@function line-height-to-ratio($font-size, $line-height) {
+  $font-size-in-px: to-px($font-size);
+  $height-in-ratio: 0;
+
+  @if unitless($line-height) {
+    @return $line-height;
+  } @else if math.unit($line-height) == "%" {
+    @return math.div(remove-units($line-height), 100);
+  } @else if math.unit($line-height) == "px" {
+    @return math.div($line-height, $font-size-in-px);
+  } @else if math.unit($line-height) == "rem" {
+    @return math.div(to-px($line-height), $font-size-in-px);
+  } @else {
+    @error 'Line-height must be in px, rem, uniless';
+  }
+}
+
+@function set-font($family, $weight, $size, $line-height: 1, $args...) {
+  @if type-of($size) == number {
+    @return list.join($args, unquote(''), $separator: space) $weight #{to-rem($size)}/#{line-height-to-ratio($size, $line-height)} unquote($family);
+  } @else {
+    @return list.join($args, unquote(''), $separator: space) $weight #{$size}/#{$line-height} unquote($family);
+  }
+}
+
+// $stages-ratio-list: 50% 50%;
+@function get-animation-key($stage-number, $stages-ratio-list) {
+  $sum: 0%;
+
+  @if $stage-number > list.length($stages-ratio-list) {
+    @error "is not a valid index";
+  }
+
+  $index: 1;
+
+  @each $name in $stages-ratio-list {
+    @if $index <= $stage-number {
+      $sum: $sum + $name;
+      $index: $index + 1;
+    }
+  }
+
+  @return $sum * 100;
+}
+
+@function round($number, $decimals: 0) {
+  $n: 1;
+
+  @if $decimals > 0 {
+      @for $i from 1 through $decimals {
+          $n: $n * 10;
+      }
+  }
+
+  @return math.div(math.round($number * $n), $n);
+}
+
+@function fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, $size-unit: 'px', $slope-unit: 'vw') {
+  $slope: '';
+
+  @if type-of($min-breakpoint) == number and type-of($max-breakpoint) == number {
+    $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  } @else if type-of($min-breakpoint) == string and type-of($max-breakpoint) == string  {
+    $min-breakpoint: map.get(variables.$breakpoints, $min-breakpoint);
+    $max-breakpoint: map.get(variables.$breakpoints, $max-breakpoint);
+
+    @debug $min-breakpoint $max-breakpoint;
+
+    @if $min-breakpoint and $max-breakpoint {
+      $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+      
+    } @else {
+      @error 'Cant find value in dictionary $breakpoints for $min-breakpoint or $max-breakpoint param';
+    }
+  } @else {
+    @error '$min-breakpoint or $max-breakpoint must me number or string type';
+  }
+
+  $slope-to-unit: round($slope * 100, 3);
+  $intercept: round($min-size - $slope * $min-breakpoint, 3);
+
+  @if $size-unit == 'rem' {
+    $min-size: to-rem($min-size);
+    $max-size: to-rem($max-size);
+    $intercept: round(to-rem($intercept), 3);
+  }
+
+  @return clamp(#{$min-size}, #{$slope-to-unit}#{$slope-unit} + #{$intercept}, #{$max-size});
+}
+
+
+@function fluid-font-size($min-size, $max-size, $min-breakpoint: null, $max-breakpoint: null) {
+  @if $min-breakpoint and $max-breakpoint {
+    @return fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, 'rem'); 
+  } @else {
+    $min-breakpoint: math.min(map.values(variables.$breakpoints)...);
+    $max-breakpoint: math.max(map.values(variables.$breakpoints)...);
+
+    @if $min-breakpoint and $max-breakpoint {
+      @return fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, 'rem'); 
+    } @else {
+      @error 'Cant find value in dictionary $breakpoints for $min-breakpoint or $max-breakpoint param';
+    }
+  }
+}

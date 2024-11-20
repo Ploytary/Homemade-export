@@ -1,0 +1,356 @@
+@use '../abstracts';
+
+// $font-main: 'DM-Sans, sans-serif';
+// $font-main: 'Nunito Sans, sans-serif';
+
+:root {
+  --main-font: nunito sans, sans-serif;
+
+  &[lang='ru'] {
+    --main-font: nunito sans, sans-serif;
+  }
+
+  &[lang='en'] {
+    --main-font: dm-sans, sans-serif;
+  }
+
+  --font-size-xs: #{abstracts.to-rem(14px)};
+  --font-size-s: #{abstracts.to-rem(16px)};
+  --font-size-m: #{abstracts.to-rem(18px)};
+  --font-size-xm: #{abstracts.to-rem(22px)};
+  --font-size-l: #{abstracts.to-rem(26px)};
+  --font-size-xl: #{abstracts.to-rem(30px)};
+  --font-size-2xl: #{abstracts.to-rem(48px)};
+  --font-size-3xl: #{abstracts.to-rem(60px)};
+  --font-fluid-size-s: #{abstracts.fluid-font-size(14px, 18px, small, medium)};
+  --font-fluid-size-m: #{abstracts.fluid-font-size(24px, 30px)};
+  --font-fluid-size-l: #{abstracts.fluid-font-size(26px, 48px)};
+  --font-fluid-size-xl: #{abstracts.fluid-font-size(36px, 48px)};
+  --font-fluid-size-2xl: #{abstracts.fluid-font-size(32px, 60px)};
+  --font-fluid-size-3xl: #{abstracts.fluid-font-size(26px, 90px)};
+  --font-fluid-size-4xl: #{abstracts.fluid-font-size(36px, 200px)};
+  --font-fluid-size-5xl: #{abstracts.fluid-font-size(120px, 200px, small, medium)};
+}
+
+body {
+  font: abstracts.set-font(var(--main-font), 400, var(--font-size-s), 1.875); 
+}
+
+b {
+  @include abstracts.set-font-properties($weight: inherit);
+}
+
+.section {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-fluid-size-l), 1, inherit);
+
+    &::before {
+      @include abstracts.set-font-properties(0.625em, 1);
+    }
+  }
+}
+
+.main-button {
+  @include abstracts.set-font-properties(var(--font-size-s), 1, 500);
+
+  &--slim {
+    @include abstracts.set-font-properties(var(--font-size-xs), 2);
+  }
+
+  &--responsive {
+    @include abstracts.set-font-properties(var(--font-fluid-size-s), 1);
+  }
+}
+
+.form-button {
+  @include abstracts.set-font-properties(var(--font-size-xs), 2);
+
+  &--filter {
+    @include abstracts.set-font-properties(var(--font-size-s), 1.875, 500);
+  }
+}
+
+.pagination-button {
+  @include abstracts.set-font-properties(var(--font-size-s), 1, 500);
+}
+
+.navbar {
+  .navigation-menu__item {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.2, 700);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+
+  .navigation-menu__submenu > .navigation-menu__item-list > .navigation-menu__item {
+    @include abstracts.set-font-properties(var(--font-size-s), 1.2, 400);
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
+.burger-menu {
+  &__item {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.2, 700);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+
+  &__submenu &__item-list &__item {
+    @include abstracts.set-font-properties(var(--font-size-x), 1.2, 400);
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
+.navbar-search-box {
+  .input-field__input::placeholder {
+    @include abstracts.set-font-properties(var(--font-size-m), 1.7);
+  }
+}
+
+.hero-slider {
+  &__slide-title {
+    @include abstracts.set-font-properties(var(--font-fluid-size-3xl), 1.2, inherit);
+  }
+
+  &__slide-description {
+    @include abstracts.set-font-properties(var(--font-fluid-size-s), 1.2);
+  }
+}
+
+.text-divider {
+  &--outlined {
+    @include abstracts.set-font-properties(var(--font-fluid-size-4xl), 1);
+  }
+}
+
+.qualities-section {
+  &__list-item::before {
+    @include abstracts.set-font-properties(var(--font-size-xl), 1);
+  }
+
+  &__list-item-title {
+    @include abstracts.set-font-properties(var(--font-size-l), 1.5, inherit);
+  } 
+
+  &__list-item-description {
+    @include abstracts.set-font-properties(var(--font-size-s), 1.875);
+  }
+}
+
+.shop-category-widget {
+  &__category-list-column {
+    @include abstracts.set-font-properties(var(--font-fluid-size-l), 1.1);
+  }
+
+  &__link-item::before {
+    @include abstracts.set-font-properties(var(--font-size-xl), 1);
+  }
+
+  &__decorative-text-row {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.875);
+  }
+}
+
+.product-card {
+  &__name {
+    @include abstracts.set-font-properties(var(--font-size-m), 1.2, 500);
+ }
+
+  &__price {
+    @include abstracts.set-font-properties(var(--font-size-m), 1.2);
+ }
+}
+
+.testimonials {
+  &__testimonial-card-author-name {
+    @include abstracts.set-font-properties(var(--font-size-xm), 1.25);
+  }
+
+  &__testimonial-card-author-role {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.25, 700);
+  }
+
+  &__testimonial-card-text {
+    @include abstracts.set-font-properties(var(--font-fluid-size-m), 1.6, 500);
+  }
+}
+
+.blog-article {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-size-l), 1.35, inherit);
+  }
+
+  &__info {
+    @include abstracts.set-font-properties(var(--font-size-xs), 2.15, 500);
+  }
+}
+
+.page-footer {
+  @include abstracts.set-font-properties(var(--font-size-s), 2.15);
+
+  &__column-title {
+    @include abstracts.set-font-properties(var(--font-size-xm), 1.875);
+  }
+}
+
+.page-title {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-fluid-size-2xl), 1.32);
+  }
+
+  &__breadcrumbs {
+    @include abstracts.set-font-properties(var(--font-size-xs), 2.45, 500);
+  }
+}
+
+.team-list {
+  &__person-name {
+    @include abstracts.set-font-properties(var(--font-size-l), 1.3);
+  }
+
+  &__person-role {
+    @include abstracts.set-font-properties(var(--font-size-m), 1.3, 600);
+  }
+}
+
+.page-not-found-section {
+  &__accent-text {
+    @include abstracts.set-font-properties(var(--font-fluid-size-5xl), 0.8, 500);
+  }
+
+  &__lead-text {
+    @include abstracts.set-font-properties(var(--font-size-xl), 1.2);
+  }
+}
+
+.faq-section {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-size-xl), 2);
+  }
+}
+
+.faq-section__accordion.accordion {
+  .accordion {
+    &__summary {
+      @include abstracts.set-font-properties(var(--font-size-m), 1.65, 500);
+    }
+  }
+}
+
+.special-offer-divider {
+  &__accent-text {
+    @include abstracts.set-font-properties(var(--font-fluid-size-xl), 1.25);
+  }
+}
+
+.service-features-section {
+  &__term {
+    @include abstracts.set-font-properties(var(--font-size-l), 1, 500);
+    color: var(--brand-color-shadow);
+  }
+}
+
+.our-philosophy-section {
+  &__item-title {
+    @include abstracts.set-font-properties(var(--font-size-l), 1.25, inherit);
+  }
+}
+
+.achievements-divider-section {
+  &__term {
+    @include abstracts.set-font-properties(var(--font-size-s), 1.75, 500);
+  }
+
+  &__description {
+    @include abstracts.set-font-properties(var(--font-size-3xl), 1, 500);
+  }
+}
+
+.progress-bar {
+  &__labels {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1, 600);
+  }
+}
+
+.contacts-form {
+  &__note {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.875);
+  }
+}
+
+.contacts-section {
+  &__column-title {
+    @include abstracts.set-font-properties(var(--font-size-xl), 1.375, inherit);
+  }
+}
+
+.promo-section-candle-features {
+  &__item-title {
+    @include abstracts.set-font-properties(var(--font-size-l), 1.5, 500);
+  }
+}
+
+.list-item-badge {
+  @include abstracts.set-font-properties(var(--font-size-xl), 1);
+}
+
+.wave-text-divider {
+  text {
+    @include abstracts.set-font-properties(var(--font-fluid-size-m), 1);
+
+    // font: abstracts.set-font(var(--main-font), 400, 32px, 1);
+
+    // @include abstracts.cq-from(medium) {
+    //   font: abstracts.set-font(var(--main-font), 400, 28px, 1);
+    // }
+
+    // @include abstracts.cq-from(extra-large) {
+    //   font: abstracts.set-font(var(--main-font), 400, 24px, 1);
+    // }
+  }
+}
+
+.review-form {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-fluid-size-m), 1.5);
+  }
+
+  &__rating-label {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.875, 700, $letter-spacing: 0.1em);
+  }
+
+  &__note {
+    @include abstracts.set-font-properties(var(--font-size-xs), 1.875);
+  }
+}
+
+.shop-item-details {
+  &__product-title {
+    @include abstracts.set-font-properties(var(--font-fluid-size-l), 1, 400);
+  }
+
+  &__price {
+    @include abstracts.set-font-properties(var(--font-size-xl));
+ }
+
+  &__meta-item-term {
+    @include abstracts.set-font-properties(var(--font-size-xs), $weight: 700, $letter-spacing: 0.1em);
+  }
+}
+
+.tabs {
+  &__term {
+    @include abstracts.set-font-properties(var(--font-size-xs), $weight: 700);
+  }
+
+  &__item-trigger {
+    @include abstracts.set-font-properties(var(--font-fluid-size-s), $weight: 500);
+  }
+}
+
+.default-modal  {
+  &__title {
+    @include abstracts.set-font-properties(var(--font-size-xl), 1.2);
+  }
+}

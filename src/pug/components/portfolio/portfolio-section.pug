@@ -1,0 +1,36 @@
+include ./portfolio-data.pug
+
+-
+  const portfolioSectionContent = {
+    title: {en: 'Latest case studies', ru: 'Последние'},
+    description: {
+      en: 'Since 2009, collections of scented candles and sachets from soy wax, a natural oil extracted from soy beans, have been made by hand and with warmth in the soul.',
+      ru: 'С 2009 года коллекции ароматических свечей и саше из соевого воска — натурального масла, добываемого из соевых бобов, изготавливаются вручную и с теплотой в душе.',
+    },
+    button: {
+      en: 'Load more', ru: 'Загрузить еще',
+    },
+    mediaSettings: [
+      {viewport: 380, imageCount: 1, widthOffset: 0},
+      {viewport: 1200, imageCount: 2, widthOffset: -30},
+    ],
+  };
+
+section.section.portfolio-section.full-width
+  h2.section__title.portfolio-section__title= portfolioSectionContent.title[lang]
+  p.portfolio-section__description= portfolioSectionContent.description[lang]
+  .tile-viewer.portfolio-section__tile-viewer
+    .tile-viewer__filters 
+      +form-button({en: 'All', ru: 'Все'}[lang])(filter, type = 'button', class = 'tile-viewer__filter-button', data-category = 'All')
+      each category in categories
+        +form-button(category.name[lang])(filter, type = 'button', class = 'tile-viewer__filter-button', data-category = category.id)
+    .tile-viewer__wrapper
+      div.tile-viewer__grid-sizer
+      ul.tile-viewer__viewport
+        each portfolioItem, index in portfolioItems
+          - const categoryNames = portfolioItem.category.map((itemCategoryId) => categories.find((category) => category.id === itemCategoryId).name[lang]);
+          li.tile-viewer__item(class = portfolioItem.category, data-index = index, data-name = portfolioItem.name[lang], data-category = categoryNames.join(', '))
+            a(href = portfolioItem.href)
+              span.visually-hidden= portfolioItem.name[lang]
+              +respImage({media: portfolioSectionContent.mediaSettings, srcset: portfolioItem.image.srcset}, alt = '')(class = 'tile-viewer__img')
+    +main-button-arrow(portfolioSectionContent.button[lang])(alternate, class = 'tile-viewer__load-more-button')

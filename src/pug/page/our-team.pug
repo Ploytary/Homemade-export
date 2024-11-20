@@ -1,0 +1,26 @@
+extends ../layout/page-layout
+
+block variables
+  -
+    const pageScripts = ['pages/our-team/index.ts'];
+    const pageTitle = { en: 'Our team', ru: 'Наша команда' };
+    const pageId = 'our-team';
+    const pathSegments = [ {en: 'Home', ru: 'Главная'}, pageTitle ];
+    const titleOptions = {
+      name: pageTitle,
+      pathSegments: pathSegments,
+      lazySizesBackground: [
+        {path: '@image/common/page-header-background-6-2560px.jpg', wDescriptor: 2560},
+        {path: '@image/common/page-header-background-6-1920px.jpg', wDescriptor: 1200},
+        {path: '@image/common/page-header-background-6-1220px.jpg', wDescriptor: 768},
+      ],
+    };
+
+block content
+  main(class= 'page-content content-grid our-team')
+    +page-header(titleOptions)
+    include ../components/promo/promo-best-recipes-section.pug
+    include ../components/shared/divider/our-team-text-divider.pug
+    include ../components/team/team-section.pug
+    +client-list-divider()(airy)
+    include ../components/contacts/contacts-widget.pug

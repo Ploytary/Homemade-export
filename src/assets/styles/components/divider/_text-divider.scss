@@ -1,0 +1,31 @@
+.text-divider {
+  transform: translate3d(0%, 0 , 0);
+  display: flex;
+
+  * {
+    width: max-content;
+    flex-shrink: 0;
+  }
+
+  &--outlined {
+    position: relative;
+    z-index: -1;
+    align-items: center;
+    gap: 0.3em;
+    padding-bottom: 30px;
+    margin-block: auto;
+    height: min-content;
+    text-wrap: nowrap;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--brand-color-secondary-rich);
+    color: transparent;
+  }
+
+  &--compact {
+    gap: 16px;
+    margin-bottom: 20px;
+    color: var(--brand-color-accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+}

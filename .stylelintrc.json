@@ -1,0 +1,15 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+  "rules": {
+    "declaration-no-important": [true, { "severity": "warning" }],
+    "value-no-vendor-prefix": true,
+    "declaration-empty-line-before": null,
+    "declaration-property-value-no-unknown": null,
+    "no-unknown-custom-properties": null,
+    "scss/no-global-function-names": null,
+    "color-hex-length": null,
+    "font-family-name-quotes": null,
+    "selector-class-pattern": null
+  },
+  "ignoreFiles": ["src/assets/styles/debug-index.css", "build/**/*.css"]
+}

@@ -1,0 +1,26 @@
+mixin sticker()
+  -
+    const textContent = {en: 'handmade store', ru: 'Магазин ручной работы' };
+    const textGap = ' '
+    const contentRepeatCount = {en: 3, ru: 2};
+    const stickerRadius = 94;
+    const textCircleRadius = 78;
+    const fontSize = 18;
+    const {rotate, ...props} = attributes;
+    const classList = [
+      rotate && 'sticker--rotate',
+    ];
+  svg.sticker(
+      viewBox = `${-1 * stickerRadius} ${-1 * stickerRadius} ${2 * stickerRadius} ${2 * stickerRadius}`,
+      width = `${2 * stickerRadius}` height = `${2 * stickerRadius}`,
+      class = classList
+    )&attributes(props)
+    image(href = '@image/raw/common/hero-slider-sticker.png', x = stickerRadius * -1, y = stickerRadius * -1, width = '100%', height = '100%')
+    +circleText(textCircleRadius, fontSize, textContent[lang], {repeat: contentRepeatCount[lang]})(
+      class = 'sticker__text',
+      x = -1 * textCircleRadius,
+      y = -1 * textCircleRadius,
+      width = textCircleRadius * 2,
+      height = textCircleRadius * 2
+    )
+    

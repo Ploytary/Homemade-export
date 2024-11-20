@@ -1,0 +1,51 @@
+-
+  const heroSectionTextContent = {
+    title: {en: 'Hero with promotional offers', ru: 'Обложка с рекламными предложениями'},
+  };
+  
+  const heroSlides = [
+    {
+      titleMarkup: {en: 'Feel aesthetics <br>of simple <b>things</b>', ru: 'Почувствуйте эстетику <br>простых <b>вещей</b>'} ,
+      description: {
+        en: 'Check out our handmade soap selection for the very best in unique or custom, handmade pieces from our bar soaps shops.',
+        ru: 'Ознакомьтесь с нашей подборкой мыла ручной работы, чтобы найти самые лучшие уникальные или изготовленные на заказ изделия ручной работы из наших магазинов мыла',
+      },
+      background: [
+        {path: '@image/common/hero-slider-1-1920px.jpg', wDescriptor: 1920},
+        {path: '@image/common/hero-slider-1-1500px.jpg', wDescriptor: 1024},
+        {path: '@image/common/hero-slider-1-1200px.jpg', wDescriptor: 768},
+        {path: '@image/common/hero-slider-1-800px.jpg', wDescriptor: 380},
+      ],
+    },
+    {
+      titleMarkup: {en: 'Care of your <br>body and <b>soul</b>', ru: 'Забота о своем <br>теле и <b>душе</b>'},
+      description: {
+        en: 'We cuate each product with the best natural ingredients to deliver the highest quality products.',
+        ru: 'Мы снабжаем каждый продукт лучшими натуральными ингредиентами, чтобы обеспечить продукцию высочайшего качества.',
+      },
+      background: [
+        {path: '@image/common/hero-slider-2-1920px.jpg', wDescriptor: 1920},
+        {path: '@image/common/hero-slider-2-1500px.jpg', wDescriptor: 1024},
+        {path: '@image/common/hero-slider-2-1200px.jpg', wDescriptor: 768},
+        {path: '@image/common/hero-slider-2-800px.jpg', wDescriptor: 380},
+      ],
+    },
+    {
+      titleMarkup: {en: 'Handmade soap <br>with <b>natural oils</b>', ru: 'Мыло ручной работы <br>с <b>натуральными маслами</b>'},
+      description: {
+        en: 'Check out our handmade soap selection for the very best in unique or custom, handmade pieces from our bar soaps shops.',
+        ru: 'Ознакомьтесь с нашей подборкой мыла ручной работы, чтобы найти самые лучшие уникальные или изготовленные на заказ изделия ручной работы из наших магазинов мыла.',
+      },
+      background: [
+        {path: '@image/common/hero-slider-3-1920px.jpg', wDescriptor: 1920},
+        {path: '@image/common/hero-slider-3-1500px.jpg', wDescriptor: 1024},
+        {path: '@image/common/hero-slider-3-1200px.jpg', wDescriptor: 768},
+        {path: '@image/common/hero-slider-3-800px.jpg', wDescriptor: 380},
+      ],
+    },
+  ];
+
+
+section.section.hero-section.full-width.content-grid-cancel
+  h2.section__title.visually-hidden= heroSectionTextContent.title[lang]
+  +hero-slider(heroSlides)

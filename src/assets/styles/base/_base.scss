@@ -1,0 +1,11 @@
+@use '../abstracts';
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--brand-color-primary);
+  color: var(--text-color);
+}
+
+b {
+  color: var(--brand-color-accent);
+}

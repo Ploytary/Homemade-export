@@ -1,0 +1,39 @@
+//- -
+//-   const links = [
+//-   {
+//-     label: 'Twitter',
+//-     href: 'https://twitter.com',
+//-     icon: 'twitter',
+//-   },
+//-   {
+//-     label: 'Facebook',
+//-     href: 'https://www.facebook.com',
+//-     icon: 'facebook',
+//-   },
+//-   {
+//-     label: 'Linkedin',
+//-     href: 'https://linkedin.com',
+//-     icon: 'linkedin',
+//-   },
+//-   {
+//-     label: 'Instagram',
+//-     href: 'https://www.instagram.com/',
+//-     icon: 'instagram',
+//-   },
+//- ]
+
+mixin socials(list)
+  -
+    const localization = {
+      en: 'Social networks',
+      ru: 'Социальные сети',
+    };
+
+    const {alternate, ...props} = attributes;
+
+  article.socials&attributes(props)
+    h3.socials__title.visually-hidden= lang ?  localization[lang] : localization.en
+    ul.socials__list
+      each item in list
+        li.socials__item
+          +socials-button(item.label, item.icon)(href = item.href, alternate = alternate)
