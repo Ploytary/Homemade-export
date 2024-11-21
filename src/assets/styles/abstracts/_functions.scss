@@ -1,6 +1,7 @@
 @use 'sass:math';
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:meta';
 @use 'sass:string';
 @use './variables';
 
@@ -11,7 +12,7 @@
 @function to-rem($number) {
   $default-rem-size: 16; // px
 
-  @if unitless($number) {
+  @if math.is-unitless($number) {
     @error 'unitless parameter';
   } @else if math.unit($number) == "px" {
     @return math.div(remove-units($number), $default-rem-size) * 1rem;
@@ -25,7 +26,7 @@
 @function to-px($number) {
   $default-rem-size: 16; // px
 
-  @if unitless($number) {
+  @if math.is-unitless($number) {
     @error 'unitless parameter';
   } @else if math.unit($number) == "px" {
     @return remove-units($number) * 1px;
@@ -40,7 +41,7 @@
   $font-size-in-px: to-px($font-size);
   $height-in-ratio: 0;
 
-  @if unitless($line-height) {
+  @if math.is-unitless($line-height) {
     @return $line-height;
   } @else if math.unit($line-height) == "%" {
     @return math.div(remove-units($line-height), 100);
@@ -54,10 +55,10 @@
 }
 
 @function set-font($family, $weight, $size, $line-height: 1, $args...) {
-  @if type-of($size) == number {
-    @return list.join($args, unquote(''), $separator: space) $weight #{to-rem($size)}/#{line-height-to-ratio($size, $line-height)} unquote($family);
+  @if meta.type-of($size) == number {
+    @return list.join($args, string.unquote(''), $separator: space) $weight #{to-rem($size)}/#{line-height-to-ratio($size, $line-height)} string.unquote($family);
   } @else {
-    @return list.join($args, unquote(''), $separator: space) $weight #{$size}/#{$line-height} unquote($family);
+    @return list.join($args, string.unquote(''), $separator: space) $weight #{$size}/#{$line-height} string.unquote($family);
   }
 }
 
@@ -96,9 +97,9 @@
 @function fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, $size-unit: 'px', $slope-unit: 'vw') {
   $slope: '';
 
-  @if type-of($min-breakpoint) == number and type-of($max-breakpoint) == number {
+  @if meta.type-of($min-breakpoint) == number and meta.type-of($max-breakpoint) == number {
     $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
-  } @else if type-of($min-breakpoint) == string and type-of($max-breakpoint) == string  {
+  } @else if meta.type-of($min-breakpoint) == string and meta.type-of($max-breakpoint) == string  {
     $min-breakpoint: map.get(variables.$breakpoints, $min-breakpoint);
     $max-breakpoint: map.get(variables.$breakpoints, $max-breakpoint);
 

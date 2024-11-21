@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:math';
+@use 'sass:meta';
 @use "./variables";
 @use "./functions";
 
@@ -94,8 +95,8 @@
 }
 
 @mixin set-font-properties($size: null, $line-height: null, $weight: null, $style: null, $letter-spacing: null) {
-  $is-size-in-px: type-of($size) == number and math.unit($size) == "px";
-  $is-line-height-in-px: type-of($size) == number and math.unit($line-height) == "px";
+  $is-size-in-px: meta.type-of($size) == number and math.unit($size) == "px";
+  $is-line-height-in-px: meta.type-of($size) == number and math.unit($line-height) == "px";
 
   @if $size {
     @if $is-size-in-px {
