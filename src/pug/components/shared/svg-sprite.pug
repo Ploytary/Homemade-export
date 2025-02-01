@@ -1,6 +1,0 @@
-mixin sprite(id, className)
-  - const iconClass = className ?? `${id}-icon`;
-  svg.svg-icon&attributes(attributes)(
-    class=iconClass
-  )
-    use(xlink:href=require(`@sprite#${id}`))

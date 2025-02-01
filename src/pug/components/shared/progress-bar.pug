@@ -1,9 +1,0 @@
-mixin progress-bar(name, value, unit = '%')
-  .progress-bar(data-value = value) 
-    p.progress-bar__labels
-      span.progress-bar__name= lang ? name[lang] : name
-      span.progress-bar__value
-        span= value
-        span= unit
-    .progress-bar__bar
-      .progress-bar__bar-value  
